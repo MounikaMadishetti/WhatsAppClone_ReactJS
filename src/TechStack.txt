@@ -1,0 +1,18 @@
+1. React
+
+2. Firebase RealTime DB
+
+3. Material UI
+Install Material-UI's source files via npm. We take care of injecting the CSS needed.
+$ npm install @material-ui/core
+$ npm install @material-ui/icons
+
+4. React Router
+
+5. React Context API
+
+6. Redux
+
+7. Google Authentication
+
+8. Integrate to Firebase
