@@ -2,13 +2,27 @@ import React, {useState, useEffect} from 'react';
 import './SidebarChat.css';
 import {Avatar} from '@material-ui/core';
 import db from './firebase';
+import {Link} from 'react-router-dom';
 
 const SidebarChat = (props) => {
     const [seed, setSeed] = useState('');
+    const [messages, setMessages] = useState([]);
     useEffect(()=>{
         setSeed(Math.floor(Math.random()*5000));
 
     }, []);
+
+    
+    useEffect(()=>{
+        if(props.id) {
+            
+            db.collection('rooms').doc(props.id)
+            .collection('messages')
+            .orderBy('timestamp', 'desc')
+            .onSnapshot((snapshot) => setMessages(snapshot.docs.map(doc=>doc.data())))
+
+        }
+    }, [props.id])
     
 
     const createChat = () => {
@@ -24,14 +38,16 @@ const SidebarChat = (props) => {
 
     return(
         !props.addNewChat ? 
+        <Link to = {`/rooms/${props.id}`}>
         <div className="sidebarChat">
             <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
             <div className="sidebarChat__info">
             <h2>{props.name}</h2>
-            <p>Last Name..</p>
+            <p>{messages[0]?.message}</p>
             </div>
 
         </div>
+        </Link>
         : 
         <div onClick={createChat} className="sidebarChat">
         <h2>Add new Chat</h2>

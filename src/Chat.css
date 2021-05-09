@@ -39,6 +39,21 @@
     padding: 30px;
     overflow: scroll;
 }
+.chat__body::-webkit-scrollbar { 
+    width: 6px;  /* Safari and Chrome */
+}
+
+/* Track */
+.chat__body::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+.chat__body::-webkit-scrollbar-thumb {
+    background: rgb(197, 195, 195); 
+  }
+  
+ 
 
 .chat__message {
     position: relative;
